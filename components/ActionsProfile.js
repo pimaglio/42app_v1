@@ -15,8 +15,8 @@ class ActionsProfile extends React.Component {
     render() {
         return (
             <View style={styles.blockActions}>
-                <Ionicons name="md-call" size={32} color="white" />
-                <Ionicons name="md-text" size={32} color="white" />
+                <Ionicons name="md-call" size={32} color={theme.colors.primary} />
+                <Ionicons name="md-text" size={32} color={theme.colors.primary} />
             </View>
         );
     }
@@ -26,10 +26,8 @@ const styles = StyleSheet.create({
     blockActions: {
         flex: 1,
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'flex-end',
         justifyContent: 'space-around',
-        backgroundColor: theme.colors.primary,
-
     },
 });
 

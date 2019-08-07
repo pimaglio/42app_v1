@@ -25,7 +25,7 @@ export default class Home extends React.Component {
                 </View>
                 <View style={styles.shortcut_profile}>
                     <View style={styles.actionProfile}>
-                        <ActionsProfile/>
+
                     </View>
                     <View>
 
@@ -39,7 +39,7 @@ export default class Home extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#fafafa',
         alignItems: 'center',
     },
     main_profile: {
@@ -52,6 +52,6 @@ const styles = StyleSheet.create({
         height: 50,
     },
     shortcut_profile: {
-        flex: 4,
+        flex: 5,
     },
 });

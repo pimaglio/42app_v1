@@ -7,6 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 
 import {connect} from 'react-redux'
+import ActionsProfile from "./ActionsProfile";
 
 class PictureInfos extends React.Component {
     constructor(props) {
@@ -25,7 +26,7 @@ class PictureInfos extends React.Component {
 
     isAvailable = () => {
         let status = this.props.myProfile.location;
-        if (status === null)
+        if (status[0] === null)
             return 'UNAVAILABLE';
         else
             return status;
@@ -34,10 +35,10 @@ class PictureInfos extends React.Component {
     colorStatus = () => {
         let colors = '';
         if (this.isAvailable() === 'UNAVAILABLE') {
-            colors = "backgroundColor: 'red'";
+            colors = "#D8636F";
             return colors;
         } else {
-            colors = "backgroundColor: theme.colors.primary";
+            colors = theme.colors.primary;
             return colors;
         }
     };
@@ -47,25 +48,30 @@ class PictureInfos extends React.Component {
         let level = this.props.myProfile.cursus_users;
         let bgcolor = this.colorStatus();
         let status = this.isAvailable();
-        console.log(user_image);
 
         return (
-            <ImageBackground
-                source={require('../assets/bg_profile.png')}
-                imageStyle={styles.bgProfile}
-                style={styles.containerBg}
-            >
+            <View style={{flex: 1, width: theme.width}}>
                 <View style={styles.containerImage}>
                     <Image
                         source={{url: user_image}}
                         imageStyle={{borderRadius: 150 / 2}}
                         style={styles.userImage}
                     />
-                    <View style={[styles.iconStatus, {bgcolor}]}>
+                    <View style={[styles.iconStatus, {backgroundColor: bgcolor}]}>
                         <Text style={[styles.textStatus]}>{status}</Text>
                     </View>
                 </View>
-            </ImageBackground>
+                <View style={{flex: 1}}>
+                    <ImageBackground
+                        source={require('../assets/bg_alt2.png')}
+                        style={styles.imageBg}
+                    >
+                    </ImageBackground>
+                </View>
+                <View style={styles.blockActions}>
+                    <ActionsProfile/>
+                </View>
+            </View>
         );
     }
 }
@@ -76,37 +82,32 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     blockActions: {
-
+        flex: 1,
     },
     containerImage: {
         width: theme.width,
-        flex: 1,
+        position: 'absolute',
+        bottom: 0,
         flexDirection: 'column',
-        alignItems: 'center'
+        alignItems: 'center',
+        zIndex: 1
     },
-    containerBg: {
+    imageBg: {
         flex: 1,
-        flexDirection: 'row',
         width: theme.width,
-        height: '100%',
-        alignItems: 'center'
-    },
-    bgProfile: {
-        width: theme.width,
-        height: '100%'
     },
     iconStatus: {
         position: 'absolute',
+        right: 20,
+        top: 33,
         paddingLeft: 10,
         paddingRight: 10,
         paddingTop: 3,
         paddingBottom: 3,
-        right: 30,
-        top: 20,
         borderRadius: 5,
         borderWidth: 1,
         borderColor: 'white',
-        backgroundColor: '#D8636F'
+        zIndex: 11
     },
     textStatus: {
         fontFamily: 'Futura-medium',
