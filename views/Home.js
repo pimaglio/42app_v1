@@ -1,34 +1,48 @@
 import React from 'react'
-import {StatusBar, StyleSheet, View, ImageBackground, Text} from 'react-native';
-
-import HeaderTitleLogin from '../components/HeaderProfileTitle';
-import PictureInfos from '../components/PictureInfos';
+import {StatusBar, StyleSheet, View, Text} from 'react-native';
 
 import {theme} from "../constants";
-import {Block, Card} from '../components';
-import FadeInView from "../components/fadeAnim";
-import ActionsProfile from "../components/ActionsProfile";
+import {connect} from "react-redux";
+import {Loading, FadeInView, LevelBlock, InfosBlock, AgendaBlock, HeaderProfileTitle, PictureInfos} from "../components";
 
-export default class Home extends React.Component {
+
+class Home extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+        };
+    }
+
     static navigationOptions = {
-        headerTitle: <HeaderTitleLogin/>,
+        headerTitle: <HeaderProfileTitle/>,
     };
 
     render() {
-
         const duration = 1500;
+
+        /*if (this.props.myProfile.login === undefined) {
+            return (
+                <View style={styles.container}>
+                    <StatusBar hidden/>
+                    <Loading/>
+                </View>
+            );
+        }*/
         return (
             <FadeInView duration={duration} style={styles.container}>
                 <StatusBar hidden/>
                 <View style={styles.main_profile}>
                     <PictureInfos/>
                 </View>
-                <View style={styles.shortcut_profile}>
-                    <View style={styles.actionProfile}>
-
+                <View style={styles.content_profile}>
+                    <View style={[styles.blockLevel, styles.card]}>
+                        <LevelBlock level={this.props.myProfile.cursus_users[0]}/>
                     </View>
-                    <View>
-
+                    <View style={[styles.blockInfo, styles.card]}>
+                        <InfosBlock/>
+                    </View>
+                    <View style={[styles.blockAgenda, styles.card]}>
+                        <AgendaBlock/>
                     </View>
                 </View>
             </FadeInView>
@@ -42,16 +56,39 @@ const styles = StyleSheet.create({
         backgroundColor: '#fafafa',
         alignItems: 'center',
     },
+    card:{
+        backgroundColor: 'white',
+        paddingHorizontal: 15,
+        borderWidth: 1,
+        borderColor: '#f7f7f7',
+        borderRadius: 3,
+        marginVertical: 10
+    },
     main_profile: {
         flex: 2,
         width: '100%',
         alignItems: 'center',
+        marginBottom: 10
     },
-    actionProfile: {
-        width: theme.width,
-        height: 50,
-    },
-    shortcut_profile: {
+    content_profile: {
         flex: 5,
+        width: theme.width / 1.1
     },
+    blockLevel: {
+        flex: 1,
+        maxHeight: 60
+    },
+    blockInfo: {
+        flex: 1,
+        maxHeight: 110
+    },
+    blockAgenda:{
+        flex: 1
+    }
 });
+
+const mapStateToProps = (state) => {
+    return state
+};
+
+export default connect(mapStateToProps)(Home)

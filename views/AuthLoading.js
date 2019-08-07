@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-    ActivityIndicator,
     AsyncStorage,
     StatusBar,
     StyleSheet,
@@ -8,9 +7,11 @@ import {
 } from 'react-native';
 
 import Auth from '../actions/Auth';
+
+import {Loading} from '../components';
+
 import {connect} from 'react-redux';
 import {getProfile} from "../store/actions";
-import Loading from '../components/Loading';
 
 class AuthLoading extends React.Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class AuthLoading extends React.Component {
     }
 
     fetchProfile = async(token) => {
-        return fetch('https://api.intra.42.fr/v2/me',
+        return await fetch('https://api.intra.42.fr/v2/me',
             {
                 method: 'GET',
                 headers: {
@@ -45,9 +46,8 @@ class AuthLoading extends React.Component {
                             () => {
                                 this.props.navigation.navigate('App');
                             },
-                            2000
+                            1500
                         );
-
                     }
                     else
                         this.props.navigation.navigate('Auth');
@@ -67,7 +67,11 @@ class AuthLoading extends React.Component {
     }
 }
 
-export default connect(null, {getProfile})(AuthLoading)
+const mapStateToProps = (state) => {
+    return state
+};
+
+export default connect(mapStateToProps, {getProfile})(AuthLoading)
 
 const styles = StyleSheet.create({
     container: {

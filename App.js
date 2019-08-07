@@ -6,9 +6,7 @@ import {Provider} from 'react-redux';
 import rootReducer from './store/reducers';
 
 import * as Font from 'expo-font';
-import {ActivityIndicator, Dimensions, ImageBackground, StatusBar, StyleSheet, Text, View} from 'react-native';
-
-let {height, width} = Dimensions.get('screen');
+import {ActivityIndicator, StatusBar, StyleSheet, View} from 'react-native';
 
 const store = createStore(rootReducer);
 /*store.subscribe(() => console.log('store', store.getState()));*/

@@ -1,10 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, ImageBackground, Image} from 'react-native';
-import {FontAwesome} from '@expo/vector-icons';
-import {theme} from "../constants";
-import {Card} from '../components';
-import { Ionicons } from '@expo/vector-icons';
 
+import {theme} from "../constants";
 
 import {connect} from 'react-redux'
 import ActionsProfile from "./ActionsProfile";
@@ -13,9 +10,6 @@ class PictureInfos extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: '',
-            isLoading: true,
-            status: '',
         };
     }
 
@@ -61,7 +55,7 @@ class PictureInfos extends React.Component {
                         <Text style={[styles.textStatus]}>{status}</Text>
                     </View>
                 </View>
-                <View style={{flex: 1}}>
+                <View style={{flex: 2}}>
                     <ImageBackground
                         source={require('../assets/bg_alt2.png')}
                         style={styles.imageBg}
