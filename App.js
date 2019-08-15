@@ -1,15 +1,17 @@
 import React from 'react'
 import Navigation from './navigation/Navigation';
 
-import {createStore} from 'redux';
 import {Provider} from 'react-redux';
-import rootReducer from './store/reducers';
+import configureStore from './configureStore';
 
 import * as Font from 'expo-font';
 import {ActivityIndicator, StatusBar, StyleSheet, View} from 'react-native';
 
-const store = createStore(rootReducer);
-/*store.subscribe(() => console.log('store', store.getState()));*/
+const store = configureStore();
+
+/*
+store.subscribe(() => console.log('store', store.getState()));
+*/
 
 export default class App extends React.Component {
     state = {

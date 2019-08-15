@@ -4,8 +4,6 @@ import {theme} from "../constants";
 
 import { connect } from 'react-redux'
 import FadeInView from "./fadeAnim";
-import { LinearGradient } from 'expo-linear-gradient';
-
 
 class LogoTitle extends React.Component {
     constructor(props) {
@@ -17,6 +15,7 @@ class LogoTitle extends React.Component {
     }
 
     render() {
+        const {myProfile, isFetching} = this.props.myProfile;
         const time = 800;
 
         return (
@@ -24,7 +23,7 @@ class LogoTitle extends React.Component {
                     <Text style={styles.title}>
                         Hi,{"\t"}
                         <Text style={styles.login}>
-                            {this.props.myProfile.login}
+                            {myProfile.login}
                         </Text>
                         <Text style={styles.title}> !</Text>
                     </Text>

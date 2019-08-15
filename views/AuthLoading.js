@@ -4,6 +4,8 @@ import {
     StatusBar,
     StyleSheet,
     View,
+    Text,
+    ActivityIndicator
 } from 'react-native';
 
 import Auth from '../actions/Auth';
@@ -11,29 +13,21 @@ import Auth from '../actions/Auth';
 import {Loading} from '../components';
 
 import {connect} from 'react-redux';
-import {getProfile} from "../store/actions";
+import { bindActionCreators } from 'redux';
+import fetchmyProfile from '../actions/fetchMyProfile';
+import fetchAllLocation from '../actions/fetchLocation';
+import fetchLogTime from '../actions/fetchLogTime';
+
 
 class AuthLoading extends React.Component {
     constructor(props) {
         super(props);
-        this._bootstrapAsync();
     }
 
-    fetchProfile = async(token) => {
-        return await fetch('https://api.intra.42.fr/v2/me',
-            {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + token
-                }
-            }).then((response) => {
-                response.json().then((data) => {
-                    this.props.getProfile(data);
-                })
-            }).catch((error) => console.log(error));
-    };
+    componentDidMount() {
+        this._bootstrapAsync();
+
+    }
 
     _bootstrapAsync = async () => {
         AsyncStorage.getItem('userToken', (err, result) => {
@@ -41,12 +35,16 @@ class AuthLoading extends React.Component {
                 let auth = new Auth();
                 auth.checkToken(result).then((response) => {
                     if (response !== false) {
-                        this.fetchProfile(result);
+                        this.props.fetchmyProfile(result);
+                        this.props.fetchAllLocation(result);
                         setTimeout(
                             () => {
-                                this.props.navigation.navigate('App');
+                                if (!this.props.myProfile.isFetching){
+                                    this.props.fetchLogTime(this.props.myProfile.myProfile.id, result);
+                                    this.props.navigation.navigate('App');
+                                }
                             },
-                            1500
+                            1000
                         );
                     }
                     else
@@ -58,6 +56,7 @@ class AuthLoading extends React.Component {
     };
 
     render() {
+
         return (
             <View style={styles.container}>
                 <StatusBar hidden/>
@@ -67,11 +66,19 @@ class AuthLoading extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return state
-};
+function mapStateToProps(state) {
+    return {
+        myProfile: state.myProfile
+    }
+}
 
-export default connect(mapStateToProps, {getProfile})(AuthLoading)
+function mapDispatchToProps(dispatch) {
+    return {
+        ...bindActionCreators({ fetchmyProfile, fetchAllLocation, fetchLogTime }, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthLoading)
 
 const styles = StyleSheet.create({
     container: {

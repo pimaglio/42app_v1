@@ -5,8 +5,12 @@ import {theme} from "../constants";
 
 import {connect} from 'react-redux'
 import ActionsProfile from "./ActionsProfile";
+import {bindActionCreators} from "redux";
+import fetchmyProfile from "../actions/fetchMyProfile";
+
 
 class PictureInfos extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -19,7 +23,7 @@ class PictureInfos extends React.Component {
     };
 
     isAvailable = () => {
-        let status = this.props.myProfile.location;
+        let status =  this.props.myProfile.myProfile.location;
         if (status[0] === null)
             return 'UNAVAILABLE';
         else
@@ -38,8 +42,7 @@ class PictureInfos extends React.Component {
     };
 
     render() {
-        const user_image = this.props.myProfile.image_url;
-        let level = this.props.myProfile.cursus_users;
+        const user_image = this.props.myProfile.myProfile.image_url;
         let bgcolor = this.colorStatus();
         let status = this.isAvailable();
 
@@ -122,8 +125,16 @@ const styles = StyleSheet.create({
     }
 });
 
-const mapStateToProps = (state) => {
-    return state
-};
+function mapStateToProps(state) {
+    return {
+        myProfile: state.myProfile
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        ...bindActionCreators({ fetchmyProfile }, dispatch)
+    }
+}
 
 export default connect(mapStateToProps)(PictureInfos)

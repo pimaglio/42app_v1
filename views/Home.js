@@ -4,6 +4,8 @@ import {StatusBar, StyleSheet, View, Text} from 'react-native';
 import {theme} from "../constants";
 import {connect} from "react-redux";
 import {Loading, FadeInView, LevelBlock, InfosBlock, AgendaBlock, HeaderProfileTitle, PictureInfos} from "../components";
+import {bindActionCreators} from "redux";
+import fetchmyProfile from "../actions/fetchMyProfile";
 
 
 class Home extends React.Component {
@@ -13,21 +15,26 @@ class Home extends React.Component {
         };
     }
 
+    componentDidMount() {
+    }
+
     static navigationOptions = {
         headerTitle: <HeaderProfileTitle/>,
     };
 
     render() {
+        const {myProfile, isFetching} = this.props.myProfile;
+
         const duration = 1500;
 
-        /*if (this.props.myProfile.login === undefined) {
+        if (isFetching) {
             return (
                 <View style={styles.container}>
                     <StatusBar hidden/>
                     <Loading/>
                 </View>
             );
-        }*/
+        }
         return (
             <FadeInView duration={duration} style={styles.container}>
                 <StatusBar hidden/>
@@ -36,7 +43,7 @@ class Home extends React.Component {
                 </View>
                 <View style={styles.content_profile}>
                     <View style={[styles.blockLevel, styles.card]}>
-                        <LevelBlock level={this.props.myProfile.cursus_users[0]}/>
+                        <LevelBlock level={myProfile.cursus_users[0]}/>
                     </View>
                     <View style={[styles.blockInfo, styles.card]}>
                         <InfosBlock/>
@@ -87,8 +94,16 @@ const styles = StyleSheet.create({
     }
 });
 
-const mapStateToProps = (state) => {
-    return state
-};
+function mapStateToProps(state) {
+    return {
+        myProfile: state.myProfile
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        ...bindActionCreators({ fetchmyProfile }, dispatch)
+    }
+}
 
 export default connect(mapStateToProps)(Home)

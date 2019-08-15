@@ -11,18 +11,19 @@
     "expo": "^33.0.0",
     "expo-font": "^5.0.1",
     "expo-linear-gradient": "~5.0.1",
+    "hex-to-rgba": "latest",
     "react": "16.8.3",
     "react-content-loader": "^4.2.2",
     "react-dom": "^16.8.6",
     "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
     "react-native-LoopAnimation": "^0.1.0",
+    "react-native-paper": "latest",
     "react-native-svg": "~9.4.0",
     "react-native-web": "^0.11.4",
     "react-navigation": "^3.11.1",
     "react-redux": "^7.1.0",
     "redux": "^4.0.4",
-    "react-native-paper": "latest",
-    "hex-to-rgba": "latest"
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.1.1"
