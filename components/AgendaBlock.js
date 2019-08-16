@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     },
     titleAgenda: {
         fontFamily: 'Futura-bold',
-        fontSize: 20,
+        fontSize: 18,
         color: 'black',
         textTransform: 'uppercase',
         paddingBottom: 15

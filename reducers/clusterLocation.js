@@ -1,7 +1,10 @@
-import { FETCH_MYPROFILE_SUCCESS, FETCH_MYPROFILE_FAILURE, FETCHING_MYPROFILE } from '../constants';
+import { FETCH_LOCATION_z1_SUCCESS, FETCH_LOCATION_z2_SUCCESS, FETCH_LOCATION_z3_SUCCESS, FETCH_LOCATION_z4_SUCCESS , FETCH_LOCATION_FAILURE, FETCHING_LOCATION } from '../constants';
 
 const initialState = {
-    allLocation: [],
+    z1: [],
+    z2: [],
+    z3: [],
+    z4: [],
     isFetching: false,
     error: false
 };
@@ -9,18 +12,36 @@ const initialState = {
 export default function myProfileReducer(state = initialState, action) {
 
     switch(action.type) {
-        case FETCHING_MYPROFILE:
+        case FETCHING_LOCATION:
             return {
                 ...state,
                 isFetching: true
             };
-        case FETCH_MYPROFILE_SUCCESS:
+        case FETCH_LOCATION_z1_SUCCESS:
+            return {
+                ...state,
+                isFetching: true,
+                z1: action.data
+            };
+        case FETCH_LOCATION_z2_SUCCESS:
+            return {
+                ...state,
+                isFetching: true,
+                z2: action.data
+            };
+        case FETCH_LOCATION_z3_SUCCESS:
+            return {
+                ...state,
+                isFetching: true,
+                z3: action.data
+            };
+        case FETCH_LOCATION_z4_SUCCESS:
             return {
                 ...state,
                 isFetching: false,
-                allLocation: action.data
+                z4: action.data
             };
-        case FETCH_MYPROFILE_FAILURE:
+        case FETCH_LOCATION_FAILURE:
             return {
                 ...state,
                 isFetching: false,

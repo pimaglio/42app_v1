@@ -1,8 +1,8 @@
 import React from 'react';
-import {StyleSheet, Text, View, ImageBackground, Image} from 'react-native';
+import {StyleSheet, Text, View, ImageBackground, Image, TouchableOpacity} from 'react-native';
 
 import {theme} from "../constants";
-
+import {Ionicons} from '@expo/vector-icons';
 import {connect} from 'react-redux'
 import ActionsProfile from "./ActionsProfile";
 import {bindActionCreators} from "redux";
@@ -13,8 +13,7 @@ class PictureInfos extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-        };
+        this.state = {};
     }
 
     async componentDidMount() {
@@ -23,7 +22,7 @@ class PictureInfos extends React.Component {
     };
 
     isAvailable = () => {
-        let status =  this.props.myProfile.myProfile.location;
+        let status = this.props.myProfile.myProfile.location;
         if (status[0] === null)
             return 'UNAVAILABLE';
         else
@@ -47,6 +46,7 @@ class PictureInfos extends React.Component {
         let status = this.isAvailable();
 
         return (
+
             <View style={{flex: 1, width: theme.width}}>
                 <View style={styles.containerImage}>
                     <Image
@@ -63,6 +63,11 @@ class PictureInfos extends React.Component {
                         source={require('../assets/bg_alt2.png')}
                         style={styles.imageBg}
                     >
+                        <View style={styles.iconCluster}>
+                            <TouchableOpacity onPress={this._onPressButton}>
+                                <Ionicons name="md-git-network" size={40} color={theme.colors.primary}/>
+                            </TouchableOpacity>
+                        </View>
                     </ImageBackground>
                 </View>
                 <View style={styles.blockActions}>
@@ -122,6 +127,17 @@ const styles = StyleSheet.create({
         borderRadius: 150 / 2,
         borderWidth: 4,
         borderColor: 'white',
+    },
+    iconCluster: {
+        width: theme.width / 3,
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    titleCluster: {
+        fontFamily: 'Futura-book',
+        fontSize: 20,
+        color: 'white'
     }
 });
 
@@ -133,7 +149,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        ...bindActionCreators({ fetchmyProfile }, dispatch)
+        ...bindActionCreators({fetchmyProfile}, dispatch)
     }
 }
 

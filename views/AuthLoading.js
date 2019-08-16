@@ -13,10 +13,10 @@ import Auth from '../actions/Auth';
 import {Loading} from '../components';
 
 import {connect} from 'react-redux';
-import { bindActionCreators } from 'redux';
+import {bindActionCreators} from 'redux';
 import fetchmyProfile from '../actions/fetchMyProfile';
-import fetchAllLocation from '../actions/fetchLocation';
 import fetchLogTime from '../actions/fetchLogTime';
+import fetchAllLocation from '../actions/fetchLocation';
 
 
 class AuthLoading extends React.Component {
@@ -39,15 +39,14 @@ class AuthLoading extends React.Component {
                         this.props.fetchAllLocation(result);
                         setTimeout(
                             () => {
-                                if (!this.props.myProfile.isFetching){
+                                if (!this.props.myProfile.isFetching && this.props.myProfile.myProfile) {
                                     this.props.fetchLogTime(this.props.myProfile.myProfile.id, result);
                                     this.props.navigation.navigate('App');
                                 }
                             },
                             1000
                         );
-                    }
-                    else
+                    } else
                         this.props.navigation.navigate('Auth');
                 });
             } else
@@ -68,13 +67,14 @@ class AuthLoading extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        myProfile: state.myProfile
+        myProfile: state.myProfile,
+        allLocation: state.allLocation
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        ...bindActionCreators({ fetchmyProfile, fetchAllLocation, fetchLogTime }, dispatch)
+        ...bindActionCreators({fetchmyProfile, fetchAllLocation, fetchLogTime}, dispatch)
     }
 }
 

@@ -59,19 +59,24 @@ export function currentMonth(logtime) {
 
 export function currentDay(logtime) {
     let date = currentDate();
-    let cumulday = 0;
     let i = 0;
     let totalDay = 0;
     let sum = 0;
 
     while (logtime[i]) {
+        let resMonth = logtime[i].begin_at.split('-');
         let currentday = logtime[i].begin_at.split('-');
         let regex = /[^T]*/g,
-            res;
-        res = regex.exec(currentday[2]);
+            resDay;
+        resDay = regex.exec(currentday[2]);
+        let currentday2 = logtime[1].end_at.split('-');
+        let regex2 = /[^T]*/g,
+            resDay2;
+        resDay2 = regex2.exec(currentday2[2]);
         let spe = logtime[i].end_at;
-        if (date.day === res[0] && spe !== null) {
-            console.log(logtime[i]);
+
+        let dayM = date.day - 1;
+        if (date.day === resDay[0] && date.month === resMonth[1] && spe !== null) {
             let time = timeRegex(logtime[i].begin_at.split('T'));
             let totalA = parseInt(time.h, 10) * 3600  + parseInt(time.m, 10) * 60 + parseInt(time.s, 10);
 
@@ -86,32 +91,29 @@ export function currentDay(logtime) {
             }
             sum += totalDay;
         }
-        /*if (date.day === res[0] && spe === null){
+        if (date.day === resDay[0] && date.month === resMonth[1] && spe === null){
             var d = new Date();
 
             let hc = d.getHours();
             let mc = d.getMinutes();
             let sc = d.getSeconds();
 
-            let resa = alltime[i].begin_at.split('T');
-            let resa2 = resa[1].split(':');
-            let regex = /[^.]*!/g,
-                match;
-            match = regex.exec(resa2[2]);
-            let h = parseInt(resa2[0], 10) * 3600;
-            let m = parseInt(resa2[1], 10) * 60;
-            let s = parseInt(match, 10);
-            let totalA = h + m + s;
+            let time = timeRegex(logtime[i].begin_at.split('T'));
+            let totalA = parseInt(time.h, 10) * 3600  + parseInt(time.m, 10) * 60 + parseInt(time.s, 10);
 
             hc *= 3600;
             mc *= 60;
             let totalB = hc + mc+ sc;
             totalDay =  totalB - totalA;
             sum += totalDay;
-        }*/
+        }
+        if (date.day === resDay2[0] && dayM.toString() === resDay[0] && date.month === resMonth[1]) {
+            time = timeRegex(logtime[i].end_at.split('T'));
+            let totalDay = parseInt(time.h, 10) * 3600  + parseInt(time.m, 10) * 60 + parseInt(time.s, 10);
+            sum += totalDay;
+        }
         i++;
     }
     sum /= 3600;
-    console.log(sum);
     return Math.round(sum);
 }

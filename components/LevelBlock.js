@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     },
     titleLevel: {
         fontFamily: 'Futura-bold',
-        fontSize: 20,
+        fontSize: 18,
         color: 'black',
         textTransform: 'uppercase',
         marginRight: 10

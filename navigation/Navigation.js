@@ -3,6 +3,7 @@ import {createSwitchNavigator, createStackNavigator, createAppContainer} from 'r
 import Home from '../views/Home';
 import Login from '../views/Login';
 import AuthLoading from '../views/AuthLoading';
+import Location from '../views/Location';
 
 import {theme} from "../constants";
 
@@ -35,11 +36,31 @@ const AuthStack = createStackNavigator(
     }
 );
 
+const Cluster = createStackNavigator(
+    {
+        Location: Location
+    },
+    {
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: 'black',
+                borderBottomWidth: 3,
+                borderBottomColor: theme.colors.primary
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+                fontWeight: 'bold',
+            },
+        }
+    }
+);
+
 export default createAppContainer(createSwitchNavigator(
     {
         AuthLoading: AuthLoading,
         App: AppStack,
         Auth: AuthStack,
+        Cluster: Cluster
     },
     {
         initialRouteName: 'AuthLoading',

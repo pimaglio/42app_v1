@@ -1,11 +1,12 @@
 import React from 'react'
-import {StatusBar, StyleSheet, View, Text} from 'react-native';
+import {StatusBar, StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 
 import {theme} from "../constants";
 import {connect} from "react-redux";
 import {Loading, FadeInView, LevelBlock, InfosBlock, AgendaBlock, HeaderProfileTitle, PictureInfos} from "../components";
 import {bindActionCreators} from "redux";
 import fetchmyProfile from "../actions/fetchMyProfile";
+import {Ionicons} from '@expo/vector-icons';
 
 
 class Home extends React.Component {
@@ -22,12 +23,16 @@ class Home extends React.Component {
         headerTitle: <HeaderProfileTitle/>,
     };
 
+    goLocation = () => {
+        this.props.navigation.navigate('Cluster')
+    };
+
     render() {
         const {myProfile, isFetching} = this.props.myProfile;
 
         const duration = 1500;
 
-        if (isFetching) {
+        if (isFetching && !myProfile) {
             return (
                 <View style={styles.container}>
                     <StatusBar hidden/>
@@ -50,6 +55,11 @@ class Home extends React.Component {
                     </View>
                     <View style={[styles.blockAgenda, styles.card]}>
                         <AgendaBlock/>
+                    </View>
+                    <View style={styles.Cluster}>
+                        <TouchableOpacity onPress={this.goLocation}>
+                            <Ionicons name="md-git-network" size={40} color={theme.colors.primary}/>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </FadeInView>
@@ -91,6 +101,17 @@ const styles = StyleSheet.create({
     },
     blockAgenda:{
         flex: 1
+    },
+    Cluster: {
+        width: theme.width / 3,
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    titleCluster: {
+        fontFamily: 'Futura-book',
+        fontSize: 20,
+        color: 'white'
     }
 });
 
