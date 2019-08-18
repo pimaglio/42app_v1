@@ -7,7 +7,7 @@ import FadeInView from "./fadeAnim";
 import fetchmyProfile from "../actions/fetchMyProfile";
 import {bindActionCreators} from "redux";
 
-class LogoTitle extends React.Component {
+class HeaderLocationTitle extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,6 +17,7 @@ class LogoTitle extends React.Component {
     }
 
     _navigate = () => {
+        this.props.navig.navigate('App');
     };
 
     render() {
@@ -38,7 +39,6 @@ class LogoTitle extends React.Component {
                     <View style={styles.containerLogo}>
                         <Text>OK</Text>
                     </View>
-
                 </FadeInView>
         );
     }
@@ -84,8 +84,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        ...bindActionCreators({fetchmyProfile,}, dispatch)
+        ...bindActionCreators({fetchmyProfile}, dispatch)
     }
 }
 
-export default connect(mapStateToProps)(LogoTitle)
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderLocationTitle)

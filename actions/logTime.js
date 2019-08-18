@@ -115,5 +115,5 @@ export function currentDay(logtime) {
         i++;
     }
     sum /= 3600;
-    return Math.round(sum);
+    return Math.floor(sum);
 }

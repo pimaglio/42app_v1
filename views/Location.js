@@ -7,6 +7,9 @@ import {CardZone, HeaderLocationTitle} from "../components";
 import {bindActionCreators} from "redux";
 import fetchmyProfile from "../actions/fetchMyProfile";
 import {nbrUsersZone, availablePlace, totalUser} from '../actions/cluster';
+import fetchAllLocation from "../actions/fetchLocation";
+import fetchLogTime from "../actions/fetchLogTime";
+import FadeInView from "../components/fadeAnim";
 
 
 class Location extends React.Component {
@@ -19,8 +22,10 @@ class Location extends React.Component {
 
     }
 
-    static navigationOptions = {
-        headerTitle: <HeaderLocationTitle/>,
+    static navigationOptions = ({navigation}) => {
+        return {
+            headerTitle: <HeaderLocationTitle navig={navigation}/>
+        }
     };
 
     _navigate = () => {
@@ -30,14 +35,15 @@ class Location extends React.Component {
     render() {
         const cluster = this.props.allLocation;
         let totaluser = totalUser(cluster.z1, cluster.z2, cluster.z3, cluster.z4);
-        console.log(totaluser);
 
         const duration = 100;
 
         return (
             <View duration={duration} style={styles.mainContainer}>
                 <View style={styles.topContainer}>
-
+                    <TouchableOpacity style={styles.containerLogo} onPress={this._navigate}>
+                        <Ionicons name="md-home" size={25} color={theme.colors.primary}/>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.container}>
                     <CardZone
@@ -94,8 +100,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        ...bindActionCreators({fetchmyProfile,}, dispatch)
+        ...bindActionCreators({fetchmyProfile, fetchAllLocation, fetchLogTime}, dispatch)
     }
 }
 
-export default connect(mapStateToProps)(Location)
+export default connect(mapStateToProps, mapDispatchToProps)(Location)
