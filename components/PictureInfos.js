@@ -17,7 +17,6 @@ class PictureInfos extends React.Component {
     }
 
     async componentDidMount() {
-
         this.isAvailable();
     };
 
@@ -40,15 +39,22 @@ class PictureInfos extends React.Component {
         }
     };
 
+    goLocation = () => {
+        this.props.navigation.navigate('Cluster')
+    };
+
     render() {
         const user_image = this.props.myProfile.myProfile.image_url;
         let bgcolor = this.colorStatus();
         let status = this.isAvailable();
 
         return (
-
             <View style={{flex: 1, width: theme.width}}>
                 <View style={styles.containerImage}>
+                    <TouchableOpacity style={styles.Cluster} onPress={this.goLocation}>
+                        <Ionicons name="md-desktop" size={32} color={theme.colors.primary}/>
+                        <Text style={[styles.textStatus, {marginLeft: 10}]}>CLUSTER</Text>
+                    </TouchableOpacity>
                     <Image
                         source={{url: user_image}}
                         imageStyle={{borderRadius: 150 / 2}}
@@ -63,11 +69,6 @@ class PictureInfos extends React.Component {
                         source={require('../assets/bg_alt2.png')}
                         style={styles.imageBg}
                     >
-                        <View style={styles.iconCluster}>
-                            <TouchableOpacity onPress={this._onPressButton}>
-                                <Ionicons name="md-git-network" size={40} color={theme.colors.primary}/>
-                            </TouchableOpacity>
-                        </View>
                     </ImageBackground>
                 </View>
                 <View style={styles.blockActions}>
@@ -127,6 +128,14 @@ const styles = StyleSheet.create({
         borderRadius: 150 / 2,
         borderWidth: 4,
         borderColor: 'white',
+    },
+    Cluster: {
+        paddingHorizontal: 20,
+        flex: 1,
+        width: theme.width,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start'
     },
     iconCluster: {
         width: theme.width / 3,

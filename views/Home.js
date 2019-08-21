@@ -1,5 +1,5 @@
 import React from 'react'
-import {StatusBar, StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {StatusBar, StyleSheet, View} from 'react-native';
 
 import {theme} from "../constants";
 import {connect} from "react-redux";
@@ -23,9 +23,6 @@ class Home extends React.Component {
         headerTitle: <HeaderProfileTitle/>,
     };
 
-    goLocation = () => {
-        this.props.navigation.navigate('Cluster')
-    };
 
     render() {
         const {myProfile, isFetching} = this.props.myProfile;
@@ -44,7 +41,7 @@ class Home extends React.Component {
             <FadeInView duration={duration} style={styles.container}>
                 <StatusBar hidden/>
                 <View style={styles.main_profile}>
-                    <PictureInfos/>
+                    <PictureInfos navigation={this.props.navigation}/>
                 </View>
                 <View style={styles.content_profile}>
                     <View style={[styles.blockLevel, styles.card]}>
@@ -55,11 +52,6 @@ class Home extends React.Component {
                     </View>
                     <View style={[styles.blockAgenda, styles.card]}>
                         <AgendaBlock/>
-                    </View>
-                    <View style={styles.Cluster}>
-                        <TouchableOpacity onPress={this.goLocation}>
-                            <Ionicons name="md-git-network" size={40} color={theme.colors.primary}/>
-                        </TouchableOpacity>
                     </View>
                 </View>
             </FadeInView>
@@ -112,7 +104,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Futura-book',
         fontSize: 20,
         color: 'white'
-    }
+    },
 });
 
 function mapStateToProps(state) {

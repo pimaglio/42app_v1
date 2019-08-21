@@ -29,7 +29,7 @@ class Location extends React.Component {
     };
 
     _navigate = () => {
-     this.props.navigation.navigate('App');
+        this.props.navigation.navigate('App');
     };
 
     render() {
@@ -41,16 +41,21 @@ class Location extends React.Component {
         return (
             <View duration={duration} style={styles.mainContainer}>
                 <View style={styles.topContainer}>
-                    <TouchableOpacity style={styles.containerLogo} onPress={this._navigate}>
-                        <Ionicons name="md-home" size={25} color={theme.colors.primary}/>
-                    </TouchableOpacity>
+                    <Ionicons name="md-people" size={50} color={theme.colors.primary}/>
+                    <Text style={styles.title}>USER CONNECTED: {' '}
+                        <Text style={{color: theme.colors.primary, fontFamily: 'Futura-bold',}}>{totaluser} </Text>
+                    </Text>
                 </View>
                 <View style={styles.container}>
-                    <CardZone
-                        zone={'z1'}
-                        nbrUser={nbrUsersZone(cluster.z1)}
-                        Available={availablePlace(cluster.z1, 1)}
-                    />
+                    <TouchableOpacity onPress={() => console.log('ok')
+                    }
+                    >
+                        <CardZone
+                            zone={'z1'}
+                            nbrUser={nbrUsersZone(cluster.z1)}
+                            Available={availablePlace(cluster.z1, 1)}
+                        />
+                    </TouchableOpacity>
                     <CardZone
                         zone={'z2'}
                         nbrUser={nbrUsersZone(cluster.z2)}
@@ -79,16 +84,23 @@ const styles = StyleSheet.create({
         backgroundColor: '#fafafa',
     },
     topContainer: {
+        maxHeight: 100,
+        backgroundColor: 'white',
         flex: 1,
         alignItems: 'center',
         justifyContent: 'space-evenly'
     },
     container: {
         paddingHorizontal: 40,
-        flex: 4,
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'space-evenly'
     },
+    title: {
+        fontFamily: 'Futura-medium',
+        fontSize: 20,
+        color: 'black'
+    }
 });
 
 function mapStateToProps(state) {

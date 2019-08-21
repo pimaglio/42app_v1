@@ -9,6 +9,7 @@ import PictureInfos from './PictureInfos';
 import Progress from './Progress';
 import CardZone from './CardZone';
 import HeaderLocationTitle from './HeaderLocationTitle';
+import HeaderZoneTitle from './HeaderZoneTitle';
 
 export {
     ActionsProfile,
@@ -22,4 +23,5 @@ export {
     Progress,
     CardZone,
     HeaderLocationTitle,
+    HeaderZoneTitle
 };

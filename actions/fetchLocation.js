@@ -10,21 +10,26 @@ import {
 export default function fetchAllLocation(token) {
     return (dispatch) => {
         fetchZone(dispatch, token, 'z1', 'z2');
-        setTimeout(
+        setInterval(
             () => {
-                fetchZone(dispatch, token, 'z2', 'z3');
-            },500
+                setTimeout(
+                    () => {
+                        fetchZone(dispatch, token, 'z2', 'z3');
+                    },500
+                );
+                setTimeout(
+                    () => {
+                        fetchZone(dispatch, token, 'z3', 'z4');
+                    },1500
+                );
+                setTimeout(
+                    () => {
+                        fetchZone(dispatch, token, 'z4', 'z5');
+                    },2000
+                );
+            }, 10000
         );
-        setTimeout(
-            () => {
-                fetchZone(dispatch, token, 'z3', 'z4');
-            },1500
-        );
-        setTimeout(
-            () => {
-                fetchZone(dispatch, token, 'z4', 'z5');
-            },2000
-        );
+
     };
 }
 
