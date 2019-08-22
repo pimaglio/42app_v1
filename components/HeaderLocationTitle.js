@@ -25,19 +25,13 @@ class HeaderLocationTitle extends React.Component {
 
         return (
                 <FadeInView duration={time} style={styles.container}>
-                    <TouchableOpacity style={styles.containerLogo} onPress={this._navigate}>
-                        <Ionicons name="md-home" size={25} color={theme.colors.primary}/>
-                    </TouchableOpacity>
                     <View style={styles.containerCenter}>
                         <Text style={styles.title}>
-                            CLUSTER{"\t"}
+                            ALL {' '}
                             <Text style={styles.login}>
                                 ZONE
                             </Text>
                         </Text>
-                    </View>
-                    <View style={styles.containerLogo}>
-                        <Text>OK</Text>
                     </View>
                 </FadeInView>
         );

@@ -35,7 +35,7 @@ export default function fetchAllLocation(token) {
 
 function fetchZone(dispatch, token, zA, zB) {
     dispatch(fetchLocation());
-    return (fetch('https://api.intra.42.fr/v2/campus/9/locations?&filter[active]=true&page[size]=100&range[host]=' + zA + ',' + zB,
+    return (fetch('https://api.intra.42.fr/v2/campus/9/locations?&filter[active]=true&sort=-host&page[size]=100&range[host]=' + zA + ',' + zB,
         {
             method: 'GET',
             headers: {

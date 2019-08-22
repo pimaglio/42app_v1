@@ -3,13 +3,11 @@ import {StatusBar, StyleSheet, View, Text, ActivityIndicator, TouchableOpacity} 
 import {Ionicons} from '@expo/vector-icons';
 import {theme} from "../constants";
 import {connect} from "react-redux";
-import {CardZone, HeaderZoneTitle} from "../components";
+import {CardZone, HeaderZoneTitle, Zone1Block} from "../components";
 import {bindActionCreators} from "redux";
 import fetchmyProfile from "../actions/fetchMyProfile";
-import {nbrUsersZone, availablePlace, totalUser} from '../actions/cluster';
 import fetchAllLocation from "../actions/fetchLocation";
 import fetchLogTime from "../actions/fetchLogTime";
-import FadeInView from "../components/fadeAnim";
 
 
 class ClusterZone extends React.Component {
@@ -24,7 +22,7 @@ class ClusterZone extends React.Component {
 
     static navigationOptions = ({navigation}) => {
         return {
-            headerTitle: <HeaderZoneTitle navig={navigation}/>
+            headerTitle: <HeaderZoneTitle zone={navigation.getParam('zone')} navig={navigation}/>
         }
     };
 
@@ -33,14 +31,12 @@ class ClusterZone extends React.Component {
     };
 
     render() {
-        console.log(this.props.navigation.getParam());
 
         const duration = 100;
 
         return (
             <View duration={duration} style={styles.mainContainer}>
-                <View style={styles.topContainer}>
-                </View>
+                <Zone1Block/>
             </View>
         )
     }
@@ -48,21 +44,9 @@ class ClusterZone extends React.Component {
 
 const styles = StyleSheet.create({
     mainContainer: {
+        paddingLeft: 10,
         flex: 1,
         backgroundColor: '#fafafa',
-    },
-    topContainer: {
-        maxHeight: 100,
-        backgroundColor: 'white',
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-evenly'
-    },
-    container: {
-        paddingHorizontal: 40,
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-evenly'
     },
     title: {
         fontFamily: 'Futura-medium',

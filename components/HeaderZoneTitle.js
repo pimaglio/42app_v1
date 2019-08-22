@@ -16,28 +16,19 @@ class HeaderZoneTitle extends React.Component {
         }
     }
 
-    _navigate = () => {
-        this.props.navig.navigate('App');
-    };
-
     render() {
+        const zone = this.props.zone;
         const time = 800;
 
         return (
                 <FadeInView duration={time} style={styles.container}>
-                    <TouchableOpacity style={styles.containerLogo} onPress={this._navigate}>
-                        <Ionicons name="md-home" size={25} color={theme.colors.primary}/>
-                    </TouchableOpacity>
                     <View style={styles.containerCenter}>
                         <Text style={styles.title}>
                             ZONE{"\t"}
                             <Text style={styles.login}>
-                                ZONE
+                                {zone}
                             </Text>
                         </Text>
-                    </View>
-                    <View style={styles.containerLogo}>
-                        <Text>OK</Text>
                     </View>
                 </FadeInView>
         );

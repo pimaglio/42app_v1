@@ -10,10 +10,14 @@ import {theme} from "../constants";
 
 const AppStack = createStackNavigator(
     {
-        Home: Home
+        Home: Home,
+        Cluster: Location,
+        Zone: Zone
     },
 
     {
+        initialRouteName: 'Home',
+        headerBackTitleVisible: false,
         defaultNavigationOptions: {
             headerStyle: {
                 backgroundColor: 'black',
@@ -80,8 +84,6 @@ export default createAppContainer(createSwitchNavigator(
         AuthLoading: AuthLoading,
         App: AppStack,
         Auth: AuthStack,
-        Cluster: Cluster,
-        Zone: ClusterZone
     },
     {
         initialRouteName: 'AuthLoading',

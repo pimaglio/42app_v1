@@ -10,6 +10,9 @@ import Progress from './Progress';
 import CardZone from './CardZone';
 import HeaderLocationTitle from './HeaderLocationTitle';
 import HeaderZoneTitle from './HeaderZoneTitle';
+import Zone1Block from './Zone1Block';
+import itemCluster from './itemCluster';
+import Test from './Test';
 
 export {
     ActionsProfile,
@@ -23,5 +26,8 @@ export {
     Progress,
     CardZone,
     HeaderLocationTitle,
-    HeaderZoneTitle
+    HeaderZoneTitle,
+    Zone1Block,
+    itemCluster,
+    Test
 };

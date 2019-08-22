@@ -47,30 +47,34 @@ class Location extends React.Component {
                     </Text>
                 </View>
                 <View style={styles.container}>
-                    <TouchableOpacity onPress={() => console.log('ok')
-                    }
-                    >
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Zone', {zone: 1})}>
                         <CardZone
                             zone={'z1'}
                             nbrUser={nbrUsersZone(cluster.z1)}
                             Available={availablePlace(cluster.z1, 1)}
                         />
                     </TouchableOpacity>
-                    <CardZone
-                        zone={'z2'}
-                        nbrUser={nbrUsersZone(cluster.z2)}
-                        Available={availablePlace(cluster.z2, 2)}
-                    />
-                    <CardZone
-                        zone={'z3'}
-                        nbrUser={nbrUsersZone(cluster.z3)}
-                        Available={availablePlace(cluster.z3, 3)}
-                    />
-                    <CardZone
-                        zone={'z4'}
-                        nbrUser={nbrUsersZone(cluster.z4)}
-                        Available={availablePlace(cluster.z4, 4)}
-                    />
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Zone', {zone: 2})}>
+                        <CardZone
+                            zone={'z2'}
+                            nbrUser={nbrUsersZone(cluster.z2)}
+                            Available={availablePlace(cluster.z2, 2)}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Zone', {zone: 3})}>
+                        <CardZone
+                            zone={'z3'}
+                            nbrUser={nbrUsersZone(cluster.z3)}
+                            Available={availablePlace(cluster.z3, 3)}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Zone', {zone: 4})}>
+                        <CardZone
+                            zone={'z4'}
+                            nbrUser={nbrUsersZone(cluster.z4)}
+                            Available={availablePlace(cluster.z4, 4)}
+                        />
+                    </TouchableOpacity>
                 </View>
 
             </View>
